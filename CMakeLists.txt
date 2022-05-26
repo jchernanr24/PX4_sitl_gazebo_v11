@@ -346,6 +346,7 @@ add_library(gazebo_catapult_plugin SHARED src/gazebo_catapult_plugin.cpp)
 add_library(gazebo_usv_dynamics_plugin SHARED src/gazebo_usv_dynamics_plugin.cpp)
 add_library(gazebo_parachute_plugin SHARED src/gazebo_parachute_plugin.cpp)
 add_library(gazebo_airship_dynamics_plugin SHARED src/gazebo_airship_dynamics_plugin.cpp)
+add_library(gazebo_motor_checks SHARED src/gazebo_motor_checks.cpp)
 
 set(plugins
   gazebo_airspeed_plugin
@@ -372,6 +373,7 @@ set(plugins
   gazebo_usv_dynamics_plugin
   gazebo_parachute_plugin
   gazebo_airship_dynamics_plugin
+  gazebo_motor_checks
   )
 
 foreach(plugin ${plugins})
@@ -432,6 +434,9 @@ endif()
 #if("${GAZEBO_VERSION}" VERSION_LESS "7.0")
   add_library(LiftDragPlugin SHARED src/liftdrag_plugin/liftdrag_plugin.cpp)
   list(APPEND plugins LiftDragPlugin)
+  add_library(McFAeroPlugin SHARED src/mcfaero_plugin/mcfaero_plugin.cpp
+                         src/mcfoamy_v2/McFoamy_FM_v2.cpp)
+  list(APPEND plugins McFAeroPlugin)
 #endif()
 
 foreach(plugin ${plugins})
